@@ -40,15 +40,11 @@ function Create_Html_List_Items(List_Items_Data) {
   let Html_List_Items = document.createElement("div");
   Html_List_Items.className = "row";
 
-  //var Mat_hangs = Danh_sach_Mat_hang;
-
   for (let i = 0; i < List_Items_Data.length; i++) {
     if (List_Items_Data[i].nodeType != 1) {
       continue;
     }
 
-    //let matHangText = new XMLSerializer().serializeToString(Mat_hangs[i]);
-    //let item_Seri = List_Items_Data[i].getAttribute("Ma_so");
     let item_Data = List_Items_Data[i];
 
     var Html_Item_Img = document.createElement("img");
@@ -133,56 +129,6 @@ function Query_Items_by_String(Query_String, List_Items_Data) {
   return Result_List_Items;
 }
 
-function onClick_Pay_Btn_Paid(Ma_hang, So_luong) {
-  global_XML_Doc_Data = Load_XML_from_File();
-  var txt = "";
-  var path = "/Du_lieu/Danh_sach_Mat_hang/Mat_hang[@Ma_so='" + Ma_hang + "']";
-
-  var nodes = global_XML_Doc_Data.evaluate(path, global_XML_Doc_Data, null, XPathResult.ANY_TYPE, null);
-  var result = nodes.iterateNext();
-
-  var pathDSBH = "/Du_lieu/Danh_sach_Mat_hang/Mat_hang[@Ma_so='" + Ma_hang + "']/Danh_sach_Ban_hang";
-  var nodesTest = global_XML_Doc_Data.evaluate(
-    pathDSBH,
-    global_XML_Doc_Data,
-    null,
-    XPathResult.ANY_TYPE,
-    null
-  );
-  var resultTest = nodesTest.iterateNext();
-
-  let newBanHang = null;
-  if (result != null) {
-    newBanHang = global_XML_Doc_Data.createElement("Ban_hang");
-    newBanHang.setAttribute("Ngay", Convert_Date(new Date()));
-    newBanHang.setAttribute("Don_gia", result.getAttribute("Don_gia_Ban"));
-    newBanHang.setAttribute("So_luong", So_luong);
-    newBanHang.setAttribute(
-      "Tien",
-      parseInt(So_luong) * parseInt(result.getAttribute("Don_gia_Ban"))
-    );
-  }
-
-  if (newBanHang != null) {
-    resultTest.appendChild(newBanHang);
-
-    let data = new XMLSerializer().serializeToString(global_XML_Doc_Data);
-    var xhr = new XMLHttpRequest();
-
-    xhr.addEventListener("readystatechange", function() {
-      if (this.readyState === 4) {
-        console.log("POST", "/PostDuLieu", this.responseText);
-      }
-    });
-
-    xhr.open("POST", "/PostDuLieu");
-    xhr.setRequestHeader("content-type", "text/xml");
-    xhr.setRequestHeader("cache-control", "no-cache");
-
-    xhr.send(data);
-  }
-}
-
 function onClick_Item_Btn_Revenue(item_Data) {
   global_XML_Doc_Data = Load_XML_from_File();
 
@@ -197,10 +143,6 @@ function onClick_Item_Btn_Revenue(item_Data) {
     null
   );
   var result_Ban_hang = nodes.iterateNext();
-
-  //var path_Mat_hang = "//Mat_hang[@Ma_so='" + item_Seri + "']";
-  //var nodes_Mat_hang = global_XML_Doc_Data.evaluate(path_Mat_hang, global_XML_Doc_Data, null, XPathResult.ANY_TYPE, null);
-  //var result_Mat_hang = nodes_Mat_hang.iterateNext();
 
   // Modal Revenue
   var modal_Revenue = document.createElement("div");
@@ -330,15 +272,6 @@ function onClick_Item_Btn_Revenue(item_Data) {
 }
 
 function onClick_Item_Btn_Pay(item_Data) {
-  // var Mat_hang;
-  // var parser = new DOMParser();
-  // if (Mat_hang_text != "") {
-  //   Mat_hang = parser.parseFromString(Mat_hang_text, "text/xml");
-  // }
-  // Mat_hang = Mat_hang.getElementsByTagName("Mat_hang")[0];
-
-  //var Mat_hang = Mat_hang_text;
-
   var modal_Payment = document.createElement("div");
   modal_Payment.className = `modal`;
   modal_Payment.style.paddingTop = `${
@@ -496,7 +429,22 @@ function onClick_Item_Btn_Pay(item_Data) {
   Html_Pay_Btn_Paid.innerHTML = `Tính tiền`;
   Html_Pay_Btn_Paid.onclick = function() {
     modal_Payment.style.display = `none`;
-    onClick_Pay_Btn_Paid(item_Data.getAttribute("Ma_so"), amount_Text.value);
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.addEventListener("readystatechange", function() {
+      if (this.readyState === 4) {
+        console.log("POST", "/PostDuLieu", this.responseText);
+      }
+    });
+
+    let params = "itemseri=" + item_Data.getAttribute("Ma_so") + "&amount=" + amount_Text.value;
+
+    xhr.open("POST", "/PostDuLieu", true);
+    xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+    xhr.setRequestHeader("cache-control", "no-cache");
+
+    xhr.send(params);
   };
 
   var btn_Huy = document.createElement("button");

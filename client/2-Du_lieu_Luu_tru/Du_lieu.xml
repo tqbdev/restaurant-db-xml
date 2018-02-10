@@ -11,6 +11,7 @@
         <Ban_hang Ngay="2018-2-10" Don_gia="45000" So_luong="1" Tien="45000"/>
         <Ban_hang Ngay="2018-2-10" Don_gia="45000" So_luong="2" Tien="90000"/>
         <Ban_hang Ngay="2018-2-10" Don_gia="45000" So_luong="2" Tien="90000"/>
+        <Ban_hang Ngay="2018-2-10" Don_gia="45000" So_luong="5" Tien="225000"/>
       </Danh_sach_Ban_hang>
     </Mat_hang>
     <Mat_hang Ten="Espresso Con Panna" Ma_so="CA_PHE_10" Don_gia_Ban="35800">

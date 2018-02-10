@@ -7,7 +7,9 @@
     "body-parser": "^1.18.2",
     "concat-stream": "^1.6.0",
     "express": "^4.16.2",
-    "pretty-data": "^0.40.0"
+    "pretty-data": "^0.40.0",
+    "xmldom": "^0.1.27",
+    "xpath.js": "^1.1.0"
   },
   "devDependencies": {},
   "scripts": {

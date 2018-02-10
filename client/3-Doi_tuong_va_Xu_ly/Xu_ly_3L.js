@@ -40,15 +40,11 @@ function Create_Html_List_Items(List_Items_Data) {
   let Html_List_Items = document.createElement("div");
   Html_List_Items.className = "row";
 
-  //var Mat_hangs = Danh_sach_Mat_hang;
-
   for (let i = 0; i < List_Items_Data.length; i++) {
     if (List_Items_Data[i].nodeType != 1) {
       continue;
     }
 
-    //let matHangText = new XMLSerializer().serializeToString(Mat_hangs[i]);
-    //let item_Seri = List_Items_Data[i].getAttribute("Ma_so");
     let item_Data = List_Items_Data[i];
 
     var Html_Item_Img = document.createElement("img");
@@ -147,10 +143,6 @@ function onClick_Item_Btn_Revenue(item_Data) {
     null
   );
   var result_Ban_hang = nodes.iterateNext();
-
-  //var path_Mat_hang = "//Mat_hang[@Ma_so='" + item_Seri + "']";
-  //var nodes_Mat_hang = global_XML_Doc_Data.evaluate(path_Mat_hang, global_XML_Doc_Data, null, XPathResult.ANY_TYPE, null);
-  //var result_Mat_hang = nodes_Mat_hang.iterateNext();
 
   // Modal Revenue
   var modal_Revenue = document.createElement("div");
@@ -280,15 +272,6 @@ function onClick_Item_Btn_Revenue(item_Data) {
 }
 
 function onClick_Item_Btn_Pay(item_Data) {
-  // var Mat_hang;
-  // var parser = new DOMParser();
-  // if (Mat_hang_text != "") {
-  //   Mat_hang = parser.parseFromString(Mat_hang_text, "text/xml");
-  // }
-  // Mat_hang = Mat_hang.getElementsByTagName("Mat_hang")[0];
-
-  //var Mat_hang = Mat_hang_text;
-
   var modal_Payment = document.createElement("div");
   modal_Payment.className = `modal`;
   modal_Payment.style.paddingTop = `${

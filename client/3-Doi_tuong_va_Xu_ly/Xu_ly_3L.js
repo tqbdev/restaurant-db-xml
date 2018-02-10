@@ -88,17 +88,17 @@ function Create_Html_List_Items(List_Items_Data) {
   return Html_List_Items;
 }
 
-function Create_Html_Amount_Items(Danh_sach_Mat_hang) {
+function Create_Html_Amount_Items(List_Items_Data) {
   let amountCoffeeItems = 0;
-  let listLength = Danh_sach_Mat_hang.length;
+  let listLength = List_Items_Data.length;
 
   for (let i = 0; i < listLength; i++) {
-    if (Danh_sach_Mat_hang[i].nodeType != 1) {
+    if (List_Items_Data[i].nodeType != 1) {
       continue;
     }
 
     if (
-      Danh_sach_Mat_hang[i]
+      List_Items_Data[i]
         .getElementsByTagName("Nhom_Mat_hang")[0]
         .getAttribute("Ten") == "Cà phê"
     ) {
@@ -107,7 +107,7 @@ function Create_Html_Amount_Items(Danh_sach_Mat_hang) {
   }
 
   return `<div class='alert alert-info'>
-  Chúng tôi hiện có ${Danh_sach_Mat_hang.length} mặt hàng 
+  Chúng tôi hiện có ${listLength} mặt hàng 
   <br /><i style='color:blue' >TqbDev : Cà phê: ${amountCoffeeItems} sản phẩm và Món ăn: ${listLength - amountCoffeeItems}</i>
   </div>`
 }
@@ -447,15 +447,15 @@ function onClick_Item_Btn_Pay(item_Data) {
     xhr.send(params);
   };
 
-  var btn_Huy = document.createElement("button");
-  btn_Huy.className = `btn btn-danger btn-md btn-block custom-lable`;
-  btn_Huy.style.cssText = `margin:10px`;
-  btn_Huy.innerHTML = `Hủy`;
-  btn_Huy.onclick = function() {
+  var Html_Pay_Btn_Discard = document.createElement("button");
+  Html_Pay_Btn_Discard.className = `btn btn-danger btn-md btn-block custom-lable`;
+  Html_Pay_Btn_Discard.style.cssText = `margin:10px`;
+  Html_Pay_Btn_Discard.innerHTML = `Hủy`;
+  Html_Pay_Btn_Discard.onclick = function() {
     modal_Payment.style.display = `none`;
   };
 
-  modal_Footer.appendChild(btn_Huy);
+  modal_Footer.appendChild(Html_Pay_Btn_Discard);
   modal_Footer.appendChild(Html_Pay_Btn_Paid);
 
   modal_Content.appendChild(modal_Footer);

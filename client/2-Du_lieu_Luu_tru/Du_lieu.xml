@@ -170,6 +170,7 @@
         <Ban_hang Ngay="2018-1-6" Don_gia="31400" So_luong="2" Tien="62800"/>
         <Ban_hang Ngay="2018-1-6" Don_gia="31400" So_luong="1" Tien="31400"/>
         <Ban_hang Ngay="2018-2-9" Don_gia="31400" So_luong="1" Tien="31400"/>
+        <Ban_hang Ngay="2018-2-10" Don_gia="31400" So_luong="2" Tien="62800"/>
       </Danh_sach_Ban_hang>
     </Mat_hang>
     <Mat_hang Ten="Gà tắm nước mắm" Ma_so="MON_AN_1" Don_gia_Ban="17000">

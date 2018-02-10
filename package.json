@@ -1,0 +1,18 @@
+{
+  "name": "restaurant-tqbdev",
+  "version": "1.0.0",
+  "description": "This is an application for restaurant",
+  "main": "server.js",
+  "dependencies": {
+    "concat-stream": "^1.6.0",
+    "express": "^4.16.2",
+    "pretty-data": "^0.40.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "tqbdev",
+  "license": "ISC"
+}

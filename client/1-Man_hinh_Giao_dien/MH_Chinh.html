@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="container-fluid custom-body">
+    <div style="background-color:#f8f8f8; margin: 10px; text-align: center">
+        <img src="../Media/logo.png" class="logo" style="float: left" />
+        <h1 id="Html_Restaurant_Name" class="noselect title-logo"></h1>
+    </div>
+
+    <div id="FUNCTION_AREA" style="background-color:gray; margin: 10px">
+        <div id="Html_Query_Items" style="padding: 10px">
+        </div>
+    </div>
+
+    <div id="NOTIFICATION_AREA" style="margin: 10px">
+    </div>
+
+    <div id="RESULT_AREA" style="background-color:white; margin: 10px">
+    </div>
+</body>
+
+</html>
+<script src="../3-Doi_tuong_va_Xu_ly/Xu_ly_3L.js"></script>
+<script>
+    //*************** Khởi động Đối tượng Thể hiện ************
+    var NOTIFICATION_AREA = document.getElementById("NOTIFICATION_AREA");
+    var RESULT_AREA = document.getElementById("RESULT_AREA");
+    var Html_Restaurant_Name = document.getElementById("Html_Restaurant_Name");
+    var Html_Query_Items = document.getElementById("Html_Query_Items");
+
+    //*************** Khởi động Dữ liệu  ************
+    var global_XML_Doc_Data = Load_XML_from_File()
+    var Restaurant_Name = global_XML_Doc_Data.getElementsByTagName("Nha_hang")[0]
+    var List_Items_Data = Array.prototype.slice.call(global_XML_Doc_Data.getElementsByTagName("Danh_sach_Mat_hang")[0].childNodes)
+        .filter(nde => nde.nodeType == 1)
+    var List_Items_Data_after_Query = List_Items_Data
+
+    //*************** Xuất thông tin   ************
+    Html_Restaurant_Name.innerHTML = Restaurant_Name.getAttribute("Ten")
+    var Html_List_Items = Create_Html_List_Items(List_Items_Data_after_Query)
+
+    RESULT_AREA.appendChild(Html_List_Items)
+    NOTIFICATION_AREA.innerHTML = Create_Html_Amount_Items(List_Items_Data_after_Query)
+
+    var Html_Input_Query_String = document.createElement("input")
+
+    Html_Input_Query_String.value = "Search..."
+
+    Html_Input_Query_String.onblur = function () {
+        if (Html_Input_Query_String.value == "") {
+            Html_Input_Query_String.value = "Search..."
+        }
+    }
+    Html_Input_Query_String.onfocus = function () {
+        if (Html_Input_Query_String.value == "Search...") {
+            Html_Input_Query_String.value = ""
+        }
+    }
+
+    Html_Input_Query_String.onkeyup = () => {
+        // Nhập
+        var Query_String = Html_Input_Query_String.value.trim()
+
+        // Xử lý 
+        if (Query_String != "") {
+            List_Items_Data_after_Query = Query_Items_by_String(Query_String, List_Items_Data)
+
+        } else {
+            List_Items_Data_after_Query = List_Items_Data
+        }
+
+        // Xuất
+        Html_List_Items = Create_Html_List_Items(List_Items_Data_after_Query)
+        RESULT_AREA.innerHTML = ""
+        RESULT_AREA.appendChild(Html_List_Items)
+
+        NOTIFICATION_AREA.innerHTML = Create_Html_Amount_Items(List_Items_Data_after_Query)            
+
+        window.parent.resizeMainIframe();
+    }
+
+    Html_Query_Items.appendChild(Html_Input_Query_String)
+</script>

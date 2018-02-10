@@ -434,13 +434,13 @@ function onClick_Item_Btn_Pay(item_Data) {
 
     xhr.addEventListener("readystatechange", function() {
       if (this.readyState === 4) {
-        console.log("POST", "/PostDuLieu", this.responseText);
+        console.log("POST", "/Payment", this.responseText);
       }
     });
 
     let params = "itemseri=" + item_Data.getAttribute("Ma_so") + "&amount=" + amount_Text.value;
 
-    xhr.open("POST", "/PostDuLieu", true);
+    xhr.open("POST", "/Payment", true);
     xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
     xhr.setRequestHeader("cache-control", "no-cache");
 

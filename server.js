@@ -35,7 +35,7 @@ app.use(
 
 app.use(express.static(path.resolve(__dirname, "client")));
 
-app.post("/PostDuLieu", function(req, res) {
+app.post("/Payment", function(req, res) {
   const filePath = path.resolve(__dirname, "client/2-Du_lieu_Luu_tru/Du_lieu.xml");
   try {
     var xmlDocStr = fs.readFileSync(filePath, 'utf-8').toString();

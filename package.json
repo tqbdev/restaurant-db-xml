@@ -1,9 +1,10 @@
 {
   "name": "restaurant-tqbdev",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "This is an application for restaurant",
   "main": "server.js",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "concat-stream": "^1.6.0",
     "express": "^4.16.2",
     "pretty-data": "^0.40.0"
@@ -14,5 +15,13 @@
     "start": "node server.js"
   },
   "author": "tqbdev",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tqbdev/restaurant-db-xml.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tqbdev/restaurant-db-xml/issues"
+  },
+  "homepage": "https://github.com/tqbdev/restaurant-db-xml#readme"
 }
